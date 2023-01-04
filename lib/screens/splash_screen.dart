@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // final controller = Get.put(NewsController());
+  final controller = Get.put(NewsController());
 
   Future<void> _checkSignIn() async {
     final auth = FirebaseAuth.instance;
@@ -24,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Duration.zero,
       () async {
         if (user != null) {
+          await controller.setupRemoteConfig();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => HomeScreen()),

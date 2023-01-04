@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 
 class Repository {
   static const String apiKey = 'f515d5520af442b39eb8c72959752b17';
-  static const String url =
-      'https://newsapi.org/v2/top-headlines?country=in&apiKey=$apiKey';
 
-  Future<List<Model>?> getNews() async {
+  Future<List<Model>?> getNews(String country) async {
+    String url =
+        'https://newsapi.org/v2/top-headlines?country=$country&apiKey=$apiKey';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final result = <Model>[];
